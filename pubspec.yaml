@@ -1,0 +1,23 @@
+name: projectpilot_demo
+description: ProjectPilotAI demo scaffold (Flutter Web)
+publish_to: "none"
+version: 0.0.1
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  google_fonts: ^5.0.0
+  # optional packages you can later enable
+  # speech_to_text: ^4.3.0
+  # http: ^0.13.6
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
