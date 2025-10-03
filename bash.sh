@@ -1,0 +1,2 @@
+flutter create projectpilot_demo
+cd projectpilot_demo
