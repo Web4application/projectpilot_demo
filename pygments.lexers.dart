@@ -184,7 +184,7 @@ class SmartyLexer(RegexLexer):
             (r'[a-zA-Z_]\w*', Name.Attribute)
         ]
     }
-
+ 
     def analyse_text(text):
         rv = 0.0
         if re.search(r'\{if\s+.*?\}.*?\{/if\}', text):
