@@ -8,3 +8,7 @@ node server.js
 cd projectpilot_full/frontend
 flutter pub get
 flutter run -d chrome
+npm create vite@latest projectpilot-frontend
+cd projectpilot-frontend
+# Select: Vue + JavaScript
+npm install
