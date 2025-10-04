@@ -12,3 +12,5 @@ npm create vite@latest projectpilot-frontend
 cd projectpilot-frontend
 # Select: Vue + JavaScript
 npm install
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
