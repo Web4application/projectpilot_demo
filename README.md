@@ -19,4 +19,4 @@
  ├── package.json
 
 ```
-[projectpilot.gif](https://chatgpt.com/s/m_68e4f7344b2481918b4714f2dd136e82)
+[projectpilot.mp4](https://chatgpt.com/s/m_68e4f7344b2481918b4714f2dd136e82)
