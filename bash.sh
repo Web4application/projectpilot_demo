@@ -14,3 +14,10 @@ cd projectpilot-frontend
 npm install
 npm install -D tailwindcss postcss autoprefixer
 npx tailwindcss init -p
+
+npm create vite@latest project-pilot-ai --template react
+cd project-pilot-ai
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+# Replace files with above content
+npm run dev
