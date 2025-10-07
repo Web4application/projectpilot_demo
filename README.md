@@ -17,3 +17,6 @@
  │    ├── globals.css
  ├── tailwind.config.js
  ├── package.json
+
+```
+[projectpilot.gif](https://chatgpt.com/s/m_68e4f7344b2481918b4714f2dd136e82)
