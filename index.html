@@ -3,16 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ProjectPilotAI – Developer’s Second Brain</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --accent: #4a90ff;
-      --dark-bg: #0b0f1a;
-      --light: #e0e7ff;
-      --glow: 0 0 15px rgba(74,144,255,0.5);
-    }
+  <title>⚡ ProjectPilotAI</title>
 
+  <style>
+    /* ====== GLOBAL ====== */
     * {
       margin: 0;
       padding: 0;
@@ -20,513 +14,273 @@
     }
 
     body {
-      font-family: 'Inter', sans-serif;
-      background: radial-gradient(circle at top, #0f1525, #000);
-      color: var(--light);
+      font-family: "Poppins", sans-serif;
+      color: #fff;
       overflow-x: hidden;
+      background: radial-gradient(circle at 20% 30%, #0a1a3f, #020611);
+      position: relative;
+      scroll-behavior: smooth;
     }
 
-    /* NAVBAR */
-    .navbar {
+    /* ====== ANIMATED BACKGROUND ====== */
+    body::before {
+      content: "";
       position: fixed;
       top: 0;
-      width: 100%;
-      background: rgba(10, 15, 30, 0.9);
-      backdrop-filter: blur(12px);
+      left: 0;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(120deg, #001f3f, #4a90ff, #0a0f2a, #001f3f);
+      background-size: 300% 300%;
+      z-index: -1;
+      filter: blur(120px);
+      animation: moveGradient 20s ease infinite;
+    }
+
+    @keyframes moveGradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* ====== NAVBAR ====== */
+    .navbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 14px 40px;
+      padding: 15px 40px;
+      background: rgba(10, 25, 47, 0.7);
+      backdrop-filter: blur(10px);
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
       z-index: 1000;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     .navbar .logo {
-      font-weight: 700;
-      font-size: 1.2rem;
-      color: var(--accent);
-      text-shadow: var(--glow);
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: #4a90ff;
     }
 
     .navbar ul {
-      display: flex;
-      gap: 25px;
       list-style: none;
+      display: flex;
+      gap: 20px;
     }
 
-    .navbar a {
-      color: var(--light);
+    .navbar ul li a {
+      color: #ccc;
       text-decoration: none;
+      padding: 8px 14px;
+      border-radius: 6px;
       transition: all 0.3s ease;
     }
 
-    .navbar a:hover {
-      color: var(--accent);
-      text-shadow: var(--glow);
+    .navbar ul li a:hover {
+      background: rgba(74, 144, 255, 0.2);
+      color: #fff;
+    }
+
+    .navbar ul li a.active {
+      color: #fff;
+      background: rgba(74, 144, 255, 0.3);
+      box-shadow: 0 0 12px rgba(74, 144, 255, 0.6);
+      animation: shimmer 2s infinite alternate;
+    }
+
+    @keyframes shimmer {
+      0% { box-shadow: 0 0 12px rgba(74, 144, 255, 0.6); }
+      100% { box-shadow: 0 0 24px rgba(74, 144, 255, 1); }
     }
 
     .toggle {
       display: none;
-      font-size: 1.8rem;
-      cursor: pointer;
-      color: var(--accent);
     }
 
+    /* ====== SECTIONS ====== */
+    section {
+      min-height: 100vh;
+      padding: 120px 40px 60px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    h2 {
+      font-size: 2.2rem;
+      margin-bottom: 20px;
+    }
+
+    p {
+      max-width: 800px;
+      margin: 0 auto;
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+
+    /* ====== FADE ANIMATION ====== */
+    .fade-section {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: opacity 1s ease-out, transform 1s ease-out;
+    }
+
+    .fade-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ====== VIDEO SECTION ====== */
+    .video-wrapper {
+      max-width: 900px;
+      margin: 40px auto;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 0 30px rgba(74, 144, 255, 0.4);
+      border: 1px solid rgba(74, 144, 255, 0.2);
+      transition: box-shadow 1s ease-in-out;
+    }
+
+    .fade-section.visible .video-wrapper {
+      box-shadow: 0 0 60px rgba(74, 144, 255, 0.8);
+    }
+
+    .video-wrapper video {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* ====== RESPONSIVE ====== */
     @media (max-width: 768px) {
       .navbar ul {
         display: none;
         flex-direction: column;
-        background: rgba(10,15,30,0.98);
+        background: rgba(10, 25, 47, 0.95);
         position: absolute;
         top: 60px;
         right: 0;
         width: 200px;
-        padding: 20px;
+        border-left: 1px solid rgba(255, 255, 255, 0.1);
       }
+
       .navbar ul.show {
         display: flex;
       }
+
       .toggle {
         display: block;
+        cursor: pointer;
+        font-size: 1.6rem;
+        color: #4a90ff;
       }
     }
-
-    /* HERO */
-    .hero {
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      text-align: center;
-      padding: 100px 20px 60px;
-      position: relative;
-    }
-
-    .hero h1 {
-      font-size: 3.6rem;
-      font-weight: 800;
-      color: white;
-      text-shadow: 0 0 25px rgba(74,144,255,0.5);
-      animation: fadeIn 2s ease;
-    }
-
-    .hero p {
-      font-size: 1.1rem;
-      color: #9ea9ff;
-      margin: 20px 0 40px;
-      max-width: 700px;
-      animation: fadeIn 2.4s ease;
-    }
-
-    .btn {
-      background: var(--accent);
-      color: #fff;
-      padding: 14px 34px;
-      border-radius: 6px;
-      text-decoration: none;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      box-shadow: 0 0 10px rgba(74,144,255,0.3);
-      animation: fadeIn 2.8s ease;
-    }
-
-    .btn:hover {
-      background: #3578ff;
-      box-shadow: 0 0 20px rgba(74,144,255,0.6);
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* FEATURES */
-    section {
-      padding: 100px 60px;
-      max-width: 1100px;
-      margin: 0 auto;
-      text-align: center;
-    }
-
-    section h2 {
-      font-size: 2rem;
-      margin-bottom: 25px;
-      color: var(--accent);
-      text-shadow: var(--glow);
-    }
-
-    .features .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 25px;
-    }
-
-    .feature-card {
-      background: rgba(20, 25, 45, 0.85);
-      padding: 25px;
-      border-radius: 10px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      border: 1px solid rgba(74,144,255,0.2);
-    }
-
-    .feature-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 0 25px rgba(74,144,255,0.4);
-    }
-
-    /* DEMO */
-    .demo .demo-box {
-      background: rgba(15, 20, 40, 0.9);
-      border-radius: 12px;
-      padding: 25px;
-      max-width: 700px;
-      margin: 0 auto;
-      text-align: left;
-      box-shadow: var(--glow);
-      border: 1px solid rgba(74,144,255,0.3);
-    }
-
-    .console {
-      font-family: monospace;
-      color: #9ea9ff;
-      white-space: pre-line;
-      overflow: hidden;
-      border-left: 2px solid var(--accent);
-      padding-left: 10px;
-      animation: blink 1s step-start infinite;
-    }
-
-    @keyframes blink {
-      50% { border-color: transparent; }
-    }
-
-    /* TEAM */
-    .team .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 30px;
-    }
-
-    .member img {
-      border-radius: 50%;
-      margin-bottom: 10px;
-      width: 120px;
-      height: 120px;
-      object-fit: cover;
-      box-shadow: var(--glow);
-    }
-
-    .member h3 {
-      color: var(--accent);
-    }
-
-    /* FOOTER */
-    footer {
-      background: rgba(10, 15, 25, 0.9);
-      text-align: center;
-      padding: 20px 0;
-      font-size: 0.9rem;
-      color: #9ea9ff;
-      border-top: 1px solid rgba(74,144,255,0.2);
-    }
-
-    /* VOICE ANIMATION */
-    .voice-wave {
-      display: flex;
-      justify-content: center;
-      gap: 4px;
-      margin-top: 20px;
-    }
-
-    .bar {
-      width: 6px;
-      height: 20px;
-      background: var(--accent);
-      animation: sound 1.2s infinite ease-in-out;
-    }
-
-    .bar:nth-child(1) { animation-delay: 0s; }
-    .bar:nth-child(2) { animation-delay: 0.2s; }
-    .bar:nth-child(3) { animation-delay: 0.4s; }
-    .bar:nth-child(4) { animation-delay: 0.6s; }
-
-    @keyframes sound {
-      0%, 100% { height: 10px; opacity: 0.7; }
-      50% { height: 30px; opacity: 1; }
-
-      .demo-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 25px;
-  justify-items: center;
-  margin-bottom: 40px;
-}
-
-.demo-item {
-  background: rgba(20, 25, 45, 0.8);
-  border-radius: 14px;
-  overflow: hidden;
-  box-shadow: 0 0 20px rgba(74, 144, 255, 0.2);
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
-  cursor: pointer;
-  width: 100%;
-  max-width: 280px;
-}
-
-.demo-item:hover {
-  transform: translateY(-6px) scale(1.05);
-  box-shadow: 0 0 35px rgba(74, 144, 255, 0.6);
-}
-
-.demo-item img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-  border-bottom: 2px solid rgba(74, 144, 255, 0.4);
-}
-
-.demo-item p {
-  padding: 12px;
-  font-size: 0.95rem;
-  color: #9ea9ff;
-}
-
-/* GLOWING BUTTON */
-.btn-glow {
-  display: inline-block;
-  padding: 14px 36px;
-  font-size: 1rem;
-  font-weight: 600;
-  color: #fff;
-  text-decoration: none;
-  border-radius: 8px;
-  background: linear-gradient(90deg, #4a90ff, #00bfff, #4a90ff);
-  background-size: 300%;
-  transition: background-position 0.6s ease, box-shadow 0.4s ease;
-  box-shadow: 0 0 20px rgba(74, 144, 255, 0.3);
-  animation: glowPulse 3s infinite ease-in-out;
-}
-
-.btn-glow:hover {
-  background-position: 100% 0;
-  box-shadow: 0 0 35px rgba(74, 144, 255, 0.6);
-}
-
-/* LIGHTBOX */
-.lightbox {
-  display: none;
-  position: fixed;
-  z-index: 2000;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(10, 15, 30, 0.95);
-  justify-content: center;
-  align-items: center;
-  backdrop-filter: blur(8px);
-}
-
-.lightbox img {
-  max-width: 85%;
-  max-height: 85%;
-  border-radius: 10px;
-  box-shadow: 0 0 40px rgba(74, 144, 255, 0.6);
-  animation: zoomIn 0.4s ease;
-}
-
-.close-btn {
-  position: absolute;
-  top: 30px;
-  right: 50px;
-  font-size: 2rem;
-  color: #fff;
-  cursor: pointer;
-  transition: color 0.3s ease;
-}
-
-.close-btn:hover {
-  color: #4a90ff;
-}
-
-@keyframes zoomIn {
-  from { transform: scale(0.8); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
-}
-
-@keyframes glowPulse {
-  0% { box-shadow: 0 0 20px rgba(74, 144, 255, 0.2); }
-  50% { box-shadow: 0 0 35px rgba(74, 144, 255, 0.6); }
-  100% { box-shadow: 0 0 20px rgba(74, 144, 255, 0.2); }
-}
-
   </style>
 </head>
-<body>
 
+<body>
+  <!-- ====== NAVBAR ====== -->
   <nav class="navbar">
     <div class="logo">⚡ ProjectPilotAI</div>
     <span class="toggle" onclick="toggleMenu()">☰</span>
     <ul id="nav-links">
       <li><a href="#features">Features</a></li>
-      <li><a href="#demo">Demo</a></li>
+      <li><a href="#demo-video">Demo</a></li>
       <li><a href="#team">Team</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </nav>
 
-  <section class="hero">
-    <h1>Meet ProjectPilotAI</h1>
-    <p>The AI-powered developer assistant that understands, analyzes, and improves your codebase — your true coding co-pilot.</p>
-    <a href="#features" class="btn">Explore Features</a>
-    <div class="voice-wave">
-      <div class="bar"></div>
-      <div class="bar"></div>
-      <div class="bar"></div>
-      <div class="bar"></div>
+  <!-- ====== SECTIONS ====== -->
+  <section id="features">
+    <h2>🚀 ProjectPilotAI Features</h2>
+    <p>Smart code analysis, automated documentation, real-time project diagnostics, and AI-powered insights — built to supercharge your workflow.</p>
+  </section>
+
+  <section id="demo-video" class="fade-section">
+    <h2>🎬 ProjectPilotAI Video Showcase</h2>
+    <div class="video-wrapper">
+      <video controls autoplay muted loop playsinline>
+        <source src="https://github.com/user-attachments/assets/29b83d6b-2f1b-4da4-b5a2-2d5eec6c215e" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
     </div>
   </section>
 
-  <section id="features" class="features">
-    <h2>🚀 Features</h2>
-    <div class="grid">
-      <div class="feature-card"><strong>🔍 AI Codebase Analysis</strong><p>Summarize entire repos, understand codebases in seconds.</p></div>
-      <div class="feature-card"><strong>✨ Intelligent Refactoring</strong><p>Catch anti-patterns, suggest best practices, and auto-fix code.</p></div>
-      <div class="feature-card"><strong>🛠 Real-Time Dev Watchdog</strong><p>Monitor file changes and instantly suggest improvements.</p></div>
-      <div class="feature-card"><strong>🤖 PR Review Bot</strong><p>Auto-review pull requests with AI-powered precision.</p></div>
-      <div class="feature-card"><strong>📄 Auto-Docs Generator</strong><p>Generate or update README, docstrings, and architecture maps.</p></div>
-      <div class="feature-card"><strong>🔈 Voice Command & TTS</strong><p>Control your dev flow using voice, or hear updates aloud.</p></div>
-      <div class="feature-card"><strong>💡 Natural Language Generator</strong><p>“Create a Flask API with Docker and tests” → Done.</p></div>
-      <div class="feature-card"><strong>🎨 Figma to Code Converter</strong><p>Instantly turn designs into real code components.</p></div>
-    </div>
+  <section id="team" class="fade-section">
+    <h2>👥 Meet the Team</h2>
+    <p>The creators of ProjectPilotAI — developers, dreamers, and designers combining logic with intuition to build the next generation of developer intelligence.</p>
   </section>
 
-  <section id="demo" class="demo">
-    <h2>⚙️ Live Console Demo</h2>
-    <div class="demo-box">
-      <div class="console" id="consoleText"></div>
-    </div>
+  <section id="contact" class="fade-section">
+    <h2>📩 Get in Touch</h2>
+    <p>Have ideas or collaborations in mind? Reach us at <a href="#" style="color:#4a90ff;">contact@projectpilot.ai</a></p>
   </section>
 
-  <section id="team" class="team">
-    <h2>👨‍💻 The Team Behind ProjectPilotAI</h2>
-    <div class="grid">
-      <div class="member">
-        <img src="https://avatars.githubusercontent.com/u/149898803?v=4" alt="Seriki Yakub">
-        <h3>Seriki Yakub</h3>
-        <p>Founder & AI Developer</p>
-      </div>
-      <div class="member">
-        <img src="https://i.imgur.com/2s3z5hO.png" alt="AI Logo">
-        <h3>ProjectPilotAI</h3>
-        <p>Autonomous AI Assistant</p>
-      </div>
-    </div>
-  </section>
-<section class="demo">
-  <h2>🚀 Project Pilot AI — Live Showcase</h2>
-  <p class="demo-subtitle">
-    Explore the intelligence behind every module — from refactoring to auto-docs, all powered by AI.
-  </p>
-
-  <div class="demo-grid">
-    <div class="demo-item" onclick="openLightbox('https://web4application.github.io/projectpilot_demo/assets/chat1.png')">
-      <img src="https://web4application.github.io/projectpilot_demo/assets/chat1.gif" alt="AI Code Analysis">
-      <p>Code Analysis</p>
-    </div>
-
-    <div class="demo-item" onclick="openLightbox('https://web4application.github.io/projectpilot_demo/assets/chat2.gif')">
-      <img src="https://web4application.github.io/projectpilot_demo/assets/chat2.gif" alt="Intelligent Refactoring">
-      <p>Refactoring</p>
-    </div>
-
-    <div class="demo-item" onclick="openLightbox('https://web4application.github.io/projectpilot_demo/assets/chat3.gif')">
-      <img src="https://web4application.github.io/projectpilot_demo/assets/chat3.gif" alt="Auto Documentation">
-      <p>Auto-Documentation</p>
-    </div>
-
-    <div class="demo-item" onclick="openLightbox('https://web4application.github.io/projectpilot_demo/assets/chat4.gif')">
-      <img src="https://web4application.github.io/projectpilot_demo/assets/chat4.gif" alt="Natural Language Code Generation">
-      <p>Code Generation</p>
-    </div>
-  </div>
-
-  <a 
-    href="https://chatgpt.com/s/m_68e50fe0539c8191aa69b26c77f2246f"
-    target="_blank"
-    class="btn-glow"
-  >
-    💬 Explore Full ChatGPT Conversation
-  </a>
-</section>
-
-<!-- LIGHTBOX MODAL -->
-<div id="lightbox" class="lightbox" onclick="closeLightbox()">
-  <span class="close-btn">&times;</span>
-  <img id="lightbox-img" src="" alt="Expanded Demo">
-</div>
-  
-  <footer>
-    © 2025 ProjectPilotAI by Web4Application | Built with ❤️ and LLMs
-  </footer>
-
+  <!-- ====== JAVASCRIPT ====== -->
   <script>
+    // Navbar toggle (mobile)
     function toggleMenu() {
       document.getElementById('nav-links').classList.toggle('show');
     }
 
-    const consoleText = document.getElementById('consoleText');
-    const demoLines = [
-      "$ analyze my codebase",
-      "→ AI: Detected 24 Python modules. 3 possible security issues fixed.",
-      "",
-      "$ generate docs",
-      "→ AI: README.md updated with latest features.",
-      "",
-      "$ refactor module utils.py",
-      "→ AI: Refactored successfully — improved code readability by 45% 🚀",
-      "",
-      "$ project pilot is working locally and online",
-      "→ AI: Refactored successfully — improved code "🧑🏿‍🏭",
-      "",
-      "$ You will see the result in your project which is on github or gitlab or whatever you want it",
-      "→ AI: initialize online project  — improving and computating project"🥰",
-      "",
-      "$ make sure you clone your project locally",
-      "→ checking,
-      "",
-    ];
-    let line = 0;
-    let char = 0;
+    // Fade-in reveal on scroll
+    function revealOnScroll() {
+      const sections = document.querySelectorAll('.fade-section');
+      const triggerBottom = window.innerHeight * 0.85;
 
-    function typeConsole() {
-      if (line < demoLines.length) {
-        if (char < demoLines[line].length) {
-          consoleText.innerHTML += demoLines[line][char];
-          char++;
-          setTimeout(typeConsole, 70);
-        } else {
-          consoleText.innerHTML += "<br>";
-          line++;
-          char = 0;
-          setTimeout(typeConsole, 400);
+      sections.forEach(section => {
+        const sectionTop = section.getBoundingClientRect().top;
+        if (sectionTop < triggerBottom) section.classList.add('visible');
+      });
+    }
+
+    window.addEventListener('scroll', revealOnScroll);
+    window.addEventListener('load', revealOnScroll);
+
+    // Smooth scroll offset
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          const offsetTop = target.offsetTop - 60;
+          window.scrollTo({
+            top: offsetTop,
+            behavior: 'smooth'
+          });
         }
-      }
+      });
+    });
+
+    // Active navbar highlighting
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.navbar ul li a');
+
+    function activateNavLink() {
+      let scrollPos = window.scrollY + 100;
+
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.offsetHeight;
+        const sectionId = section.getAttribute('id');
+
+        if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+          navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href').includes(sectionId)) {
+              link.classList.add('active');
+            }
+          });
+        }
+      });
     }
-    window.onload = typeConsole;
-    }
-    
-  function openLightbox(imgSrc) {
-  const lightbox = document.getElementById('lightbox');
-  const img = document.getElementById('lightbox-img');
-  img.src = imgSrc;
-  lightbox.style.display = 'flex';
-  }
-    
- function closeLightbox() {
-  document.getElementById('lightbox').style.display = 'none';
-}
-</script>
+
+    window.addEventListener('scroll', activateNavLink);
+    window.addEventListener('load', activateNavLink);
+  </script>
 </body>
 </html>
