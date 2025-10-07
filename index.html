@@ -254,7 +254,112 @@
     @keyframes sound {
       0%, 100% { height: 10px; opacity: 0.7; }
       50% { height: 30px; opacity: 1; }
-    }
+
+      .demo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 25px;
+  justify-items: center;
+  margin-bottom: 40px;
+}
+
+.demo-item {
+  background: rgba(20, 25, 45, 0.8);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(74, 144, 255, 0.2);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  cursor: pointer;
+  width: 100%;
+  max-width: 280px;
+}
+
+.demo-item:hover {
+  transform: translateY(-6px) scale(1.05);
+  box-shadow: 0 0 35px rgba(74, 144, 255, 0.6);
+}
+
+.demo-item img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-bottom: 2px solid rgba(74, 144, 255, 0.4);
+}
+
+.demo-item p {
+  padding: 12px;
+  font-size: 0.95rem;
+  color: #9ea9ff;
+}
+
+/* GLOWING BUTTON */
+.btn-glow {
+  display: inline-block;
+  padding: 14px 36px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #4a90ff, #00bfff, #4a90ff);
+  background-size: 300%;
+  transition: background-position 0.6s ease, box-shadow 0.4s ease;
+  box-shadow: 0 0 20px rgba(74, 144, 255, 0.3);
+  animation: glowPulse 3s infinite ease-in-out;
+}
+
+.btn-glow:hover {
+  background-position: 100% 0;
+  box-shadow: 0 0 35px rgba(74, 144, 255, 0.6);
+}
+
+/* LIGHTBOX */
+.lightbox {
+  display: none;
+  position: fixed;
+  z-index: 2000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(10, 15, 30, 0.95);
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(8px);
+}
+
+.lightbox img {
+  max-width: 85%;
+  max-height: 85%;
+  border-radius: 10px;
+  box-shadow: 0 0 40px rgba(74, 144, 255, 0.6);
+  animation: zoomIn 0.4s ease;
+}
+
+.close-btn {
+  position: absolute;
+  top: 30px;
+  right: 50px;
+  font-size: 2rem;
+  color: #fff;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.close-btn:hover {
+  color: #4a90ff;
+}
+
+@keyframes zoomIn {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes glowPulse {
+  0% { box-shadow: 0 0 20px rgba(74, 144, 255, 0.2); }
+  50% { box-shadow: 0 0 35px rgba(74, 144, 255, 0.6); }
+  100% { box-shadow: 0 0 20px rgba(74, 144, 255, 0.2); }
+}
 
   </style>
 </head>
@@ -319,7 +424,49 @@
       </div>
     </div>
   </section>
+<section class="demo">
+  <h2>🚀 Project Pilot AI — Live Showcase</h2>
+  <p class="demo-subtitle">
+    Explore the intelligence behind every module — from refactoring to auto-docs, all powered by AI.
+  </p>
 
+  <div class="demo-grid">
+    <div class="demo-item" onclick="openLightbox('https://web4application.github.io/projectpilot_demo/assets/chat1.gif')">
+      <img src="https://web4application.github.io/projectpilot_demo/assets/chat1.gif" alt="AI Code Analysis">
+      <p>Code Analysis</p>
+    </div>
+
+    <div class="demo-item" onclick="openLightbox('https://web4application.github.io/projectpilot_demo/assets/chat2.gif')">
+      <img src="https://web4application.github.io/projectpilot_demo/assets/chat2.gif" alt="Intelligent Refactoring">
+      <p>Refactoring</p>
+    </div>
+
+    <div class="demo-item" onclick="openLightbox('https://web4application.github.io/projectpilot_demo/assets/chat3.gif')">
+      <img src="https://web4application.github.io/projectpilot_demo/assets/chat3.gif" alt="Auto Documentation">
+      <p>Auto-Documentation</p>
+    </div>
+
+    <div class="demo-item" onclick="openLightbox('https://web4application.github.io/projectpilot_demo/assets/chat4.gif')">
+      <img src="https://web4application.github.io/projectpilot_demo/assets/chat4.gif" alt="Natural Language Code Generation">
+      <p>Code Generation</p>
+    </div>
+  </div>
+
+  <a 
+    href="https://chatgpt.com/s/m_68e50fe0539c8191aa69b26c77f2246f"
+    target="_blank"
+    class="btn-glow"
+  >
+    💬 Explore Full ChatGPT Conversation
+  </a>
+</section>
+
+<!-- LIGHTBOX MODAL -->
+<div id="lightbox" class="lightbox" onclick="closeLightbox()">
+  <span class="close-btn">&times;</span>
+  <img id="lightbox-img" src="" alt="Expanded Demo">
+</div>
+  
   <footer>
     © 2025 ProjectPilotAI by Web4Application | Built with ❤️ and LLMs
   </footer>
@@ -358,6 +505,18 @@
       }
     }
     window.onload = typeConsole;
-  </script>
+  
+    <script>
+  function openLightbox(imgSrc) {
+  const lightbox = document.getElementById('lightbox');
+  const img = document.getElementById('lightbox-img');
+  img.src = imgSrc;
+  lightbox.style.display = 'flex';
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').style.display = 'none';
+}
+</script>
 </body>
 </html>
