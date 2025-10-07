@@ -31,7 +31,21 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="p-10 grid md:grid-cols-2 gap-6">
+    // src/pages/Dashboard.jsx
+<div className="p-8 grid md:grid-cols-3 gap-6">
+  <div className="bg-[#12121b] p-6 rounded-xl border border-neon/10 shadow-lg">
+    <h2 className="text-neon font-bold text-xl mb-2">AI Pipelines</h2>
+    <p className="text-gray-400 text-sm">Manage and launch connected systems.</p>
+  </div>
+  <div className="bg-[#12121b] p-6 rounded-xl border border-neon/10 shadow-lg">
+    <h2 className="text-neon font-bold text-xl mb-2">Data Streams</h2>
+    <p className="text-gray-400 text-sm">Monitor live datasets and models.</p>
+  </div>
+  <div className="bg-[#12121b] p-6 rounded-xl border border-neon/10 shadow-lg">
+    <h2 className="text-neon font-bold text-xl mb-2">Analytics</h2>
+    <p className="text-gray-400 text-sm">Real-time performance visualizations.</p>
+  </div>
+  <div className="p-10 grid md:grid-cols-2 gap-6">
       <Card title="Live Model Performance">
         <Line data={chartData} />
       </Card>
