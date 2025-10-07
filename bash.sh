@@ -21,3 +21,18 @@ npm install -D tailwindcss postcss autoprefixer
 npx tailwindcss init -p
 # Replace files with above content
 npm run dev
+
+## Make sure to have the system dependencies and browsers up to date. By filtering
+## on the web module we make sure the version of playwright that gets installed is
+## the one specified in package.json
+pnpm --filter ./web exec playwright install --with-deps
+
+## Run the tests from the web module.
+pnpm run --filter ./web test:e2e
+
+## Or, if port 9000 is already used
+HTTP_PORT=9001 pnpm run --filter ./web test:e2e
+
+pnpm lint
+
+pnpm run build
